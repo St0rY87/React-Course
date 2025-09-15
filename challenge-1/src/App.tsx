@@ -2,16 +2,38 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [bill, setBill] = useState("");
+  const [howYouLIke, setHowYouLIke] = useState("dissatisfied");
+  const [howFriendLIke, setHowFriendLIke] = useState("dissatisfied");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  function resetForm() {
+    setBill("");
+    setHowYouLIke("dissatisfied");
+    setHowFriendLIke("dissatisfied");
+  }
+
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="bill">How much was the bill ?</label>
-          <input type="text" id="bill" />
+          <input
+            value={bill}
+            onChange={(e) => setBill(e.target.value)}
+            type="text"
+            id="bill"
+          />
         </div>
         <div>
           <label>How did you like the service ?</label>
-          <select>
+          <select
+            value={howYouLIke}
+            onChange={(e) => setHowYouLIke(e.target.value)}
+          >
             <option value="dissatisfied">Dissatisfied(0%)</option>
             <option value="ok">It was ok(5%)</option>
             <option value="amazing">It was amazing(10%)</option>
@@ -20,7 +42,10 @@ function App() {
         </div>
         <div>
           <label>How did your friend like the service ?</label>
-          <select>
+          <select
+            value={howFriendLIke}
+            onChange={(e) => setHowFriendLIke(e.target.value)}
+          >
             <option value="dissatisfied">Dissatisfied(0%)</option>
             <option value="ok">It was ok(5%)</option>
             <option value="amazing">It was amazing(10%)</option>
