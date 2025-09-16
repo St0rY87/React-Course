@@ -2,77 +2,86 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [bill, setBill] = useState("");
-  const [howYouLIke, setHowYouLIke] = useState("dissatisfied");
-  const [howFriendLIke, setHowFriendLIke] = useState("dissatisfied");
+  function TipCalculator() {
+    const [bill, setBill] = useState("");
+    const [persentage1, setPersentage1] = useState(0);
+    const [persentage2, setPersentage2] = useState(0);
 
-  function handleSubmit(e) {
-    e.preventDefault();
+    const tip = bill * ((persentage1 + persentage2) / 2 / 100);
+
+    function resetForm() {
+      setBill("");
+      setPersentage1(0);
+      setPersentage2(0);
+    }
+
+    return (
+      <div>
+        <BillInput bill={bill} onSetBill={setBill} />
+        <SelectPercentage persentage={persentage1} onSelect={setPersentage1}>
+          How did you like the service
+        </SelectPercentage>
+        <SelectPercentage persentage={persentage2} onSelect={setPersentage2}>
+          How did your friend like the service ?
+        </SelectPercentage>
+        {bill > 0 && (
+          <>
+            <Output bill={bill} tip={tip} />
+            <Reset onResetForm={resetForm} />
+          </>
+        )}
+      </div>
+    );
   }
 
-  function resetForm() {
-    setBill("");
-    setHowYouLIke("dissatisfied");
-    setHowFriendLIke("dissatisfied");
+  function BillInput({ bill, onSetBill }) {
+    return (
+      <div>
+        <label>How much was the bill ?</label>
+        <input
+          type="text"
+          placeholder="Bill value"
+          value={bill}
+          onChange={(e) => {
+            onSetBill(Number(e.target.value));
+          }}
+        />
+      </div>
+    );
   }
 
-  function calcTips(levelSatisfying: string) {
-    if (levelSatisfying === "dissatisfied") return 0;
-    if (levelSatisfying === "ok") return 5;
-    if (levelSatisfying === "amazing") return 10;
-    if (levelSatisfying === "absolutely") return 20;
+  function SelectPercentage({ children, persentage, onSelect }) {
+    return (
+      <div>
+        <label>{children}</label>
+        <select
+          value={persentage}
+          onChange={(e) => onSelect(Number(e.target.value))}
+        >
+          <option value="0">Dissatisfied (0%)</option>
+          <option value="5">It was ok (5%)</option>
+          <option value="10">It was good (10%)</option>
+          <option value="20">Absolutely amazing! (20%)</option>
+        </select>
+      </div>
+    );
+  }
+
+  function Output({ bill, tip }) {
+    return (
+      <h3>
+        You pay ${bill + tip} (${bill} + ${tip} tip)
+      </h3>
+    );
+  }
+
+  function Reset({ onResetForm }) {
+    return <button onClick={onResetForm}>Reset</button>;
   }
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="bill">How much was the bill ?</label>
-          <input
-            value={bill}
-            onChange={(e) => setBill(e.target.value)}
-            type="text"
-            id="bill"
-          />
-        </div>
-        <div>
-          <label>How did you like the service ?</label>
-          <select
-            value={howYouLIke}
-            onChange={(e) => setHowYouLIke(e.target.value)}
-          >
-            <option value="dissatisfied">Dissatisfied(0%)</option>
-            <option value="ok">It was ok(5%)</option>
-            <option value="amazing">It was amazing(10%)</option>
-            <option value="absolutely">Absolutely amazing(20%)</option>
-          </select>
-        </div>
-        <div>
-          <label>How did your friend like the service ?</label>
-          <select
-            value={howFriendLIke}
-            onChange={(e) => setHowFriendLIke(e.target.value)}
-          >
-            <option value="dissatisfied">Dissatisfied(0%)</option>
-            <option value="ok">It was ok(5%)</option>
-            <option value="amazing">It was amazing(10%)</option>
-            <option value="absolutely">Absolutely amazing(20%)</option>
-          </select>
-        </div>
-
-        <p className="total">
-          {`You pay $${
-            Number(bill) +
-            ((bill / 100) * (calcTips(howYouLIke) + calcTips(howFriendLIke))) /
-              2
-          } ($${bill}  + $${
-            ((bill / 100) * (calcTips(howYouLIke) + calcTips(howFriendLIke))) /
-            2
-          } tip)`}
-        </p>
-
-        <button onClick={resetForm}>Reset</button>
-      </form>
+      <TipCalculator />
     </>
   );
 }
