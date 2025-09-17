@@ -55,7 +55,12 @@ function BillInput({ bill, onSetBill }) {
         type="text"
         placeholder="Bill value"
         value={bill}
-        onChange={(e) => onSetBill(Number(e.target.value))} // Keep it as a string
+        onChange={(e) => {
+          const value = Number(e.target.value);
+          if (/^\d*\.?\d*$/.test(value)) {
+            onSetBill(value);
+          }
+        }}
       />
     </div>
   );
