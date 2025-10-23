@@ -50,16 +50,6 @@ const tempWatchedData = [
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-function NavBar({ movies }) {
-  return (
-    <nav className="nav-bar">
-      <Logo />
-      <Search />
-      <NumResults movies={movies} />
-    </nav>
-  );
-}
-
 function Logo() {
   return (
     <div className="logo">
@@ -98,16 +88,6 @@ function BtnToggle({ children, onClick }) {
   );
 }
 
-function MovieList({ movies }) {
-  return (
-    <ul className="list">
-      {movies?.map((movie) => (
-        <Movie movie={movie} key={movie.imdbID} />
-      ))}
-    </ul>
-  );
-}
-
 function Movie({ movie }) {
   const { Poster, Title, Year } = movie;
   return (
@@ -121,25 +101,6 @@ function Movie({ movie }) {
         </p>
       </div>
     </li>
-  );
-}
-
-function ListBox({ movies }) {
-  const [isOpen1, setIsOpen1] = useState(true);
-  return (
-    <div className="box">
-      <BtnToggle
-        isOpen1={isOpen1}
-        setIsOpen1={setIsOpen1}
-        onClick={() => {
-          setIsOpen1((open) => !open);
-        }}
-      >
-        {isOpen1 ? "–" : "+"}
-      </BtnToggle>
-
-      {isOpen1 && <MovieList movies={movies} />}
-    </div>
   );
 }
 
@@ -229,12 +190,40 @@ function WatchedBox() {
   );
 }
 
-function Main({ movies }) {
+function NavBar({ children }) {
+  return <nav className="nav-bar">{children}</nav>;
+}
+
+function Main({ children }) {
+  return <main className="main">{children}</main>;
+}
+
+function ListBox({ children }) {
+  const [isOpen1, setIsOpen1] = useState(true);
   return (
-    <main className="main">
-      <ListBox movies={movies} />
-      <WatchedBox />
-    </main>
+    <div className="box">
+      <BtnToggle
+        isOpen1={isOpen1}
+        setIsOpen1={setIsOpen1}
+        onClick={() => {
+          setIsOpen1((open) => !open);
+        }}
+      >
+        {isOpen1 ? "–" : "+"}
+      </BtnToggle>
+
+      {isOpen1 && children}
+    </div>
+  );
+}
+
+function MovieList({ movies }) {
+  return (
+    <ul className="list">
+      {movies?.map((movie) => (
+        <Movie movie={movie} key={movie.imdbID} />
+      ))}
+    </ul>
   );
 }
 
@@ -242,8 +231,17 @@ export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   return (
     <>
-      <NavBar movies={movies} />
-      <Main movies={movies} />
+      <NavBar>
+        <Logo />
+        <Search />
+        <NumResults movies={movies} />
+      </NavBar>
+      <Main>
+        <ListBox>
+          <MovieList movies={movies} />
+        </ListBox>
+        <WatchedBox />
+      </Main>
     </>
   );
 }
