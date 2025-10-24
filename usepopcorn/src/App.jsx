@@ -168,8 +168,6 @@ function WatchedMovie({ movie }) {
   );
 }
 
-
-
 function NavBar({ children }) {
   return <nav className="nav-bar">{children}</nav>;
 }
@@ -207,7 +205,7 @@ function MovieList({ movies }) {
 
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
-   const [watched, setWatched] = useState(tempWatchedData);
+  const [watched, setWatched] = useState(tempWatchedData);
   return (
     <>
       <NavBar>
