@@ -1,44 +1,34 @@
-import { useState } from "react";
+import { use, useState } from "react";
 
-function App() {
-  function TextExpander({
-    collapsedNumWords = 10,
-    expandButtonText = "Show more",
-    collapseButtonText = "Show less",
-    buttonColor = "blue",
-    expanded = false,
-    className,
-    children,
-  }) {
-    const [isExpanded, setIsExpanded] = useState(expanded);
+function TextExpander({
+  collapsedNumWords = 10,
+  expandButtonText = 'show more',
+  collapseButtonText = 'collapse text',
+  buttonColor = 'blue',
+  expanded = false,
+  className = '',
+  children,
+}) {
+  const[isExpanded, setIsExpanded] = useState(expanded);
 
-    const displayText = isExpanded ? children : children.split(' ').slice(0, collapsedNumWords).join(' ') + '...';
-
-    const buttonStyle = {
-      background: 'none',
-      border: 'none',
-      font: 'inherit',
-      cursor: 'pointer',
-      marginLeft: '6px',
-      color: buttonColor
-    }
-
-    return (
-      <div className={className}>
-        <span>{displayText}</span>
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          style={buttonStyle}
-        >
-          {isExpanded ? collapseButtonText : expandButtonText}
-        </button>
-      </div>
-    );
+  const styles = {
+    color: buttonColor,
+    border: 'none',
+    background: 'none',
+    fontSize: '16px',
+    cursor: 'pointer',
+    paddingLeft: '10px'
   }
 
+  const collapseText = children.split(' ').slice(0, collapsedNumWords).join(' ');
+
+  return <div  className={className}>{isExpanded ? children : collapseText}<button onClick={()=>{setIsExpanded(!isExpanded)}} style={styles} >{isExpanded ? collapseButtonText :expandButtonText}</button></div>;
+}
+
+function App() {
   return (
     <div>
-      <TextExpander buttonColor="blue">
+      <TextExpander>
         Space travel is the ultimate adventure! Imagine soaring past the stars
         and exploring new worlds. It's the stuff of dreams and science fiction,
         but believe it or not, space travel is a real thing. Humans and robots
