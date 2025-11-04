@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useState } from "react";
 
 const tempMovieData = [
@@ -203,18 +202,10 @@ function MovieList({ movies }) {
     </ul>
   );
 }
-const KEY = "1cd4c500";
 
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
-
-  useEffect(() => {
-    fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`)
-       .then((res) => res.json())
-      .then((data) => setMovies(data.Search));
-  }, []);
-
   return (
     <>
       <NavBar>
