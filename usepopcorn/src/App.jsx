@@ -210,13 +210,12 @@ function Loader() {
 
 const KEY = "1cd4c500";
 
-
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const query = "interstellar";
+  const [error, setError] = useState("");
+  const query = "isadasd";
 
   useEffect(() => {
     async function fetchMovies() {
@@ -229,23 +228,26 @@ export default function App() {
           throw new Error("Something went wrong with fetching movies");
         }
         const data = await res.json();
+        if (data.Response === "False") throw new Error("Movie not found");
+
         setMovies(data.Search);
-        setIsLoading(false);
+        console.log(data);
       } catch (err) {
         console.error(err.message);
-        setError(err.message)
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchMovies();
   }, []);
 
-
-  function ErrorMessage({message}) {
+  function ErrorMessage({ message }) {
     return (
       <p className="error">
         <span>⛔</span> {message}
       </p>
-    )
+    );
   }
 
   return (
@@ -255,12 +257,14 @@ export default function App() {
         <Search />
         <NumResults movies={movies} />
       </NavBar>
+
       <Main>
         <Box>
           {isLoading && <Loader />}
-          {isLoading && !error &&  <MovieList movies={movies} />}
+          {isLoading && !error && <MovieList movies={movies} />}
           {error && <ErrorMessage message={error} />}
-
+        </Box>
+        <Box>
           <WatchedSummary watched={watched} />
           <WatchedMovieList watched={watched} />
         </Box>
@@ -268,4 +272,3 @@ export default function App() {
     </>
   );
 }
-
