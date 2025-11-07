@@ -210,7 +210,7 @@ function Loader() {
 const KEY = "1cd4c500";
 
 export default function App() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("inception");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -221,8 +221,9 @@ export default function App() {
     async function fetchMovies() {
       try {
         setIsLoading(true);
+        setError('');
         const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${tempQuery}`
+          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
         );
         if (!res.ok) {
           throw new Error("Something went wrong with fetching movies");
@@ -238,8 +239,13 @@ export default function App() {
         setIsLoading(false);
       }
     }
+    if(query.length < 3) {
+      setMovies([]);
+      setError('');
+      return;
+    }
     fetchMovies();
-  }, []);
+  }, [query]);
 
   function ErrorMessage({ message }) {
     return (
