@@ -88,20 +88,12 @@ function BtnToggle({ children, onClick }) {
   );
 }
 
-function Movie({ movie }) {
-  const { Poster, Title, Year } = movie;
-  return (
-    <li>
-      <img src={Poster} alt={`${Title} poster`} />
-      <h3>{Title}</h3>
-      <div>
-        <p>
-          <span>🗓</span>
-          <span>{Year}</span>
-        </p>
-      </div>
-    </li>
-  );
+
+
+function MovieDetails({selectedId, onCloseMovie}) {
+  return <div  className="details">
+    <button className="btn-back" onClick={onCloseMovie}>&larr;</button>
+    {selectedId}</div>;
 }
 
 function WatchedSummary({ watched }) {
@@ -193,13 +185,29 @@ function Box({ children }) {
   );
 }
 
-function MovieList({ movies }) {
+function MovieList({ movies, onSelectMovie }) {
   return (
-    <ul className="list">
+    <ul className="list list-movies">
       {movies?.map((movie) => (
-        <Movie movie={movie} key={movie.imdbID} />
+        <Movie movie={movie} onSelectMovie={onSelectMovie} key={movie.imdbID} />
       ))}
     </ul>
+  );
+}
+
+function Movie({ movie, onSelectMovie }) {
+  const { Poster, Title, Year, imdbID } = movie;
+  return (
+    <li onClick={()=>onSelectMovie(imdbID)}>
+      <img src={Poster} alt={`${Title} poster`} />
+      <h3>{Title}</h3>
+      <div>
+        <p>
+          <span>🗓</span>
+          <span>{Year}</span>
+        </p>
+      </div>
+    </li>
   );
 }
 
@@ -215,13 +223,21 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const tempQuery = "interstellar";
+  const [selectedId, setSelectedId] = useState(null);
+
+  function handleSelectMovie(id) {
+    setSelectedId(selectedId => id === selectedId ? null: id);
+  }
+
+  function handleCloseMovie() {
+    setSelectedId(null);
+  }
 
   useEffect(() => {
     async function fetchMovies() {
       try {
         setIsLoading(true);
-        setError('');
+        setError("");
         const res = await fetch(
           `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
         );
@@ -239,9 +255,9 @@ export default function App() {
         setIsLoading(false);
       }
     }
-    if(query.length < 3) {
+    if (query.length < 3) {
       setMovies([]);
-      setError('');
+      setError("");
       return;
     }
     fetchMovies();
@@ -266,12 +282,18 @@ export default function App() {
       <Main>
         <Box>
           {isLoading && <Loader />}
-          {!isLoading && !error && <MovieList movies={movies} />}
+          {!isLoading && !error && <MovieList movies={movies} onSelectMovie={handleSelectMovie} />}
           {error && <ErrorMessage message={error} />}
         </Box>
         <Box>
-          <WatchedSummary watched={watched} />
-          <WatchedMovieList watched={watched} />
+          {selectedId ? (
+            <MovieDetails selectedId={selectedId} onCloseMovie={handleCloseMovie} />
+          ) : (
+            <>
+              <WatchedSummary watched={watched} />
+              <WatchedMovieList watched={watched} />
+            </>
+          )}
         </Box>
       </Main>
     </>
