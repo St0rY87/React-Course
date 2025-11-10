@@ -88,10 +88,12 @@ function BtnToggle({ children, onClick }) {
   );
 }
 
-function MovieDetails({ selectedId, onCloseMovie, onAddWatched }) {
+function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [userRating, setUserRating] = useState('');
+  const [userRating, setUserRating] = useState("");
+
+  const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
 
   const {
     Title: title,
@@ -107,6 +109,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched }) {
   } = movie;
 
   function handleAdd() {
+ 
     const newWatchedMovie = {
       imdbID: selectedId,
       title,
@@ -139,7 +142,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched }) {
         <Loader />
       ) : (
         <>
-          {" "}
           <header>
             <button className="btn-back" onClick={onCloseMovie}>
               &larr;
@@ -160,13 +162,22 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched }) {
           </header>
           <section>
             <div className="rating">
-              <StarRating size={24} maxRating={10}
-              onSetRating={setUserRating}
-              />
-              {userRating > 0 && <button className="btn-add" onClick={handleAdd}>
-                {" "}
-                + Add to list
-              </button>}
+              {!isWatched ? (
+                <>
+                  <StarRating
+                    size={24}
+                    maxRating={10}
+                    onSetRating={setUserRating}
+                  />
+                  {userRating > 0 && (
+                    <button className="btn-add" onClick={handleAdd}>
+                      + Add to list
+                    </button>
+                  )}
+                </>
+              ) : (
+                <p>You rated this movie</p>
+              )}
             </div>
             <p>
               <em>{plot}</em>
@@ -381,6 +392,7 @@ export default function App() {
               selectedId={selectedId}
               onCloseMovie={handleCloseMovie}
               onAddWatched={handleAddWatched}
+              watched={watched}
             />
           ) : (
             <>
