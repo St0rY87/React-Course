@@ -130,7 +130,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     const callback = (e) => {
       if (e.code === "Escape") {
         onCloseMovie();
-        console.log("Closing");
       }
     };
     document.addEventListener("keydown", callback);
@@ -351,7 +350,7 @@ function Loader() {
 const KEY = "1cd4c500";
 
 export default function App() {
-  const [query, setQuery] = useState("inception");
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -394,9 +393,9 @@ export default function App() {
 
         setMovies(data.Search);
       } catch (err) {
-        console.error(err.message);
         setError("");
         if (err.name !== "AbortError") {
+          console.log(err.message);
           setError(err.message);
         }
       } finally {
@@ -408,7 +407,9 @@ export default function App() {
       setError("");
       return;
     }
+    handleCloseMovie();
     fetchMovies();
+
     return () => {
       controller.abort();
     };
