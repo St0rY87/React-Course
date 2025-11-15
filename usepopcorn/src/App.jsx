@@ -18,10 +18,23 @@ function Logo() {
 function Search({ query, setQuery }) {
   const inputEl = useRef(null);
 
-  useEffect(()=>{
-    console.log(inputEl)
+  useEffect(() => {
     inputEl.current.focus();
-  }, [])
+
+    
+    function callback(e) {
+      if (e.code === "Enter") {
+        if (document.activeElement === inputEl.current) return;
+        inputEl.current.focus();
+        setQuery("");
+      }
+    }
+    document.addEventListener("keydown", callback);
+
+    return () => {
+      document.addEventListener("keydown", callback);
+    };
+  }, []);
 
   // useEffect(() => {
   //   const el = document.querySelector(".search");
