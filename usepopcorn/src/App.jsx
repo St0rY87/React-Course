@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import StarRating from "./StarRating";
 import { useRef } from "react";
+import { useMovies } from "./useMovies";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -21,7 +22,6 @@ function Search({ query, setQuery }) {
   useEffect(() => {
     inputEl.current.focus();
 
-    
     function callback(e) {
       if (e.code === "Enter") {
         if (document.activeElement === inputEl.current) return;
@@ -77,12 +77,11 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 
   const countRef = useRef(0);
 
-  useEffect(()=>{
-    if(userRating) countRef.current++;
-    if(userRating) count++;
-    console.log(countRef)
-  },[userRating])
-
+  useEffect(() => {
+    if (userRating) countRef.current++;
+    if (userRating) count++;
+    console.log(countRef);
+  }, [userRating]);
 
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
 
@@ -362,10 +361,8 @@ const KEY = "1cd4c500";
 
 export default function App() {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+  const {movies, isLoading, error} = useMovies(query);
 
   // const [watched, setWatched] = useState([]);
   const [watched, setWatched] = useState(() => {
@@ -395,48 +392,6 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("watched", JSON.stringify(watched));
   }, [watched]);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    async function fetchMovies() {
-      try {
-        setIsLoading(true);
-        setError("");
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
-
-          { signal: controller.signal }
-        );
-        if (!res.ok) {
-          throw new Error("Something went wrong with fetching movies");
-        }
-        const data = await res.json();
-        if (data.Response === "False") throw new Error("Movie not found");
-
-        setMovies(data.Search);
-      } catch (err) {
-        setError("");
-        if (err.name !== "AbortError") {
-          console.log(err.message);
-          setError(err.message);
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    if (query.length < 3) {
-      setMovies([]);
-      setError("");
-      return;
-    }
-    handleCloseMovie();
-    fetchMovies();
-
-    return () => {
-      controller.abort();
-    };
-  }, [query]);
 
   function ErrorMessage({ message }) {
     return (
