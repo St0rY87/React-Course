@@ -28,7 +28,7 @@ function Search({ query, setQuery }) {
     setQuery("");
   });
 
-
+ 
   useEffect(() => {
     const el = document.querySelector(".search");
     el.focus();
@@ -71,7 +71,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 
   useEffect(() => {
     if (userRating) countRef.current++;
-    console.log(countRef);
   }, [userRating]);
 
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
@@ -102,7 +101,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   // }, [imdbRating])
 
   const isTop = imdbRating > 8;
-  console.log(isTop);
 
   // const [avgRating, setAvgRating] = useState(0);
 
