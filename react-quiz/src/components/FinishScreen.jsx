@@ -17,7 +17,7 @@ const FinishScreen = ({ points, maxPossiblePoints, highscore, dispatch }) => {
         className="btn btn-ui"
         onClick={() => dispatch({ type: "restart" })}
       >
-        Restart quiz
+        Restart quiz 
       </button>
     </>
   );

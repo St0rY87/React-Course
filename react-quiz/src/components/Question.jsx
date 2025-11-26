@@ -1,8 +1,7 @@
 import Option from "./Options";
 
 function Question({ objQuestion, dispatch, answer }) {
-  console.log(objQuestion);
-  const {question} = objQuestion
+  const { question } = objQuestion;
   return (
     <div>
       <h4>{question}</h4>
