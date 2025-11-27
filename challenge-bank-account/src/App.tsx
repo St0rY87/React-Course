@@ -17,7 +17,9 @@ You can check this right at the beginning of the reducer
 There is also a minimum deposit amount of 500 to open an account 
 (which means that the balance will start at 500)
 
-5. Customer can only request a loan if there is no loan yet. If that condition is met, the requested amount will be registered in the 'loan' state, and it will be added to the balance. If the condition is not met, just return the current state
+5. Customer can only request a loan if there is no loan yet. If that condition is met, 
+the requested amount will be registered in the 'loan' state, and it will be added to the balance.
+ If the condition is not met, just return the current state
 
 6. When the customer pays the loan, the opposite happens: the money is taken from the balance, and the 'loan' will get back to 0. This can lead to negative balances, but that's no problem, because the customer can't close their account now (see next point)
 
@@ -31,7 +33,7 @@ const initialState = {
   loan: 0,
   isActive: false,
 };
-
+//openAccount, deposit, withdraw, requestLoan, payLoan, closeAccount
 function reducer(state, action) {
   const { type, payload } = action;
   const { balance, loan, isActive } = state;
@@ -42,6 +44,17 @@ function reducer(state, action) {
       return {
         ...state,
         balance: balance + 150,
+      };
+    case "withdraw":
+      return {
+        ...state,
+        balance: balance - 50,
+      };
+    case "requestLoan":
+      return loan ? {...state} : {
+        ...state,
+        loan: 5000,
+        balance: balance + 5000,
       };
   }
 }
@@ -79,12 +92,22 @@ export default function App() {
         </button>
       </p>
       <p>
-        <button onClick={() => {}} disabled={!isActive}>
+        <button
+          onClick={() => {
+            dispatch({ type: "withdraw" });
+          }}
+          disabled={!isActive}
+        >
           Withdraw 50
         </button>
       </p>
       <p>
-        <button onClick={() => {}} disabled={!isActive}>
+        <button
+          onClick={() => {
+            dispatch({ type: "requestLoan" });
+          }}
+          disabled={!isActive}
+        >
           Request a loan of 5000
         </button>
       </p>
