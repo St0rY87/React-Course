@@ -28,6 +28,10 @@ the requested amount will be registered in the 'loan' state, and it will be adde
 
 import { useReducer } from "react";
 
+const DEPOSIT = 150;
+const LOAN = 5000;
+const WITHDRAW = 50;
+
 const initialState = {
   balance: 0,
   loan: 0,
@@ -43,19 +47,29 @@ function reducer(state, action) {
     case "deposit":
       return {
         ...state,
-        balance: balance + 150,
+        balance: balance + DEPOSIT,
       };
     case "withdraw":
       return {
         ...state,
-        balance: balance - 50,
+        balance: balance - WITHDRAW,
       };
     case "requestLoan":
-      return loan ? {...state} : {
-        ...state,
-        loan: 5000,
-        balance: balance + 5000,
-      };
+      return loan
+        ? { ...state }
+        : {
+            ...state,
+            loan: LOAN,
+            balance: balance + LOAN,
+          };
+    case "payLoan":
+      return loan
+        ? {
+            ...state,
+            balance: balance - LOAN,
+            loan: 0,
+          }
+        : { ...state };
   }
 }
 
@@ -112,7 +126,12 @@ export default function App() {
         </button>
       </p>
       <p>
-        <button onClick={() => {}} disabled={!isActive}>
+        <button
+          onClick={() => {
+            dispatch({ type: "payLoan" });
+          }}
+          disabled={!isActive}
+        >
           Pay loan
         </button>
       </p>
