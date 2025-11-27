@@ -21,7 +21,9 @@ There is also a minimum deposit amount of 500 to open an account
 the requested amount will be registered in the 'loan' state, and it will be added to the balance.
  If the condition is not met, just return the current state
 
-6. When the customer pays the loan, the opposite happens: the money is taken from the balance, and the 'loan' will get back to 0. This can lead to negative balances, but that's no problem, because the customer can't close their account now (see next point)
+6. When the customer pays the loan, the opposite happens: the money is taken from the balance, 
+and the 'loan' will get back to 0. This can lead to negative balances, 
+but that's no problem, because the customer can't close their account now (see next point)
 
 7. Customer can only close an account if there is no loan, AND if the balance is zero. If this condition is not met, just return the state. If the condition is met, the account is deactivated and all money is withdrawn. The account basically gets back to the initial state
 */
@@ -71,7 +73,7 @@ function reducer(state, action) {
           }
         : { ...state };
     case 'closeAccount':
-      return balance <= 0 ? { 
+      return balance === 0 ? { 
         ...initialState
       } : {...state}
   }
