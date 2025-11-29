@@ -25,7 +25,9 @@ the requested amount will be registered in the 'loan' state, and it will be adde
 and the 'loan' will get back to 0. This can lead to negative balances, 
 but that's no problem, because the customer can't close their account now (see next point)
 
-7. Customer can only close an account if there is no loan, AND if the balance is zero. If this condition is not met, just return the state. If the condition is met, the account is deactivated and all money is withdrawn. The account basically gets back to the initial state
+7. Customer can only close an account if there is no loan, AND if the balance is zero.
+ If this condition is not met, just return the state. If the condition is met, the account
+  is deactivated and all money is withdrawn. The account basically gets back to the initialstate
 */
 
 import { useReducer } from "react";
@@ -45,7 +47,7 @@ function reducer(state, action) {
   const { balance, loan, isActive } = state;
   switch (type) {
     case "openAccount":
-      return { ...state, balance: 500, isActive: !isActive };
+      return { ...state, balance: 500, isActive: true };
     case "deposit":
       return {
         ...state,
@@ -57,13 +59,12 @@ function reducer(state, action) {
         balance: balance - WITHDRAW,
       };
     case "requestLoan":
-      return loan
-        ? { ...state }
-        : {
-            ...state,
-            loan: LOAN,
-            balance: balance + LOAN,
-          };
+      if (loan) return state;
+      return {
+        ...state,
+        loan: LOAN,
+        balance: balance + LOAN,
+      };
     case "payLoan":
       return loan
         ? {
@@ -72,10 +73,15 @@ function reducer(state, action) {
             loan: 0,
           }
         : { ...state };
-    case 'closeAccount':
-      return balance === 0 ? { 
-        ...initialState
-      } : {...state}
+    case "closeAccount":
+      return balance === 0
+        ? {
+            ...initialState,
+          }
+        : { ...state };
+
+    default:
+      throw new Error("Unknown");
   }
 }
 
@@ -142,7 +148,12 @@ export default function App() {
         </button>
       </p>
       <p>
-        <button onClick={() => {dispatch({type: 'closeAccount'})}} disabled={!isActive}>
+        <button
+          onClick={() => {
+            dispatch({ type: "closeAccount" });
+          }}
+          disabled={!isActive}
+        >
           Close account
         </button>
       </p>
