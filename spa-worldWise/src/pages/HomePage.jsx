@@ -1,5 +1,5 @@
-function HomePage() {
+function Homepage() {
   return <div>WorldWise</div>;
 }
 
-export default HomePage;
+export default Homepage;
