@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import AppNav from "../components/AppNav";
 
 function AppLayout() {
@@ -5,6 +6,7 @@ function AppLayout() {
     <div>
       <AppNav />
       <h1>APP</h1>
+      <Link to="/">Go to Home Page</Link>
     </div>
   );
 }
