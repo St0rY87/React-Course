@@ -3,7 +3,7 @@ import CityItem from "./CityItem";
 import Message from "./Message";
 import styles from "./CityList.module.css";
 
-function CityList({ cities = [], isLoading }) {
+function CityList({ cities, isLoading }) {
   if (isLoading) return <Spinner />;
   console.log(cities);
 
