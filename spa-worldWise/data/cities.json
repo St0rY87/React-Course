@@ -10,7 +10,7 @@
         "lat": 38.727881642324164,
         "lng": -9.140900099907554
       },
-      "id": 73930385
+      "id": "73930385"
     },
     {
       "cityName": "Madrid",
@@ -22,7 +22,7 @@
         "lat": 40.46635901755316,
         "lng": -3.7133789062500004
       },
-      "id": 17806751
+      "id": "17806751"
     },
     {
       "cityName": "Berlin",
@@ -34,7 +34,67 @@
         "lat": 52.53586782505711,
         "lng": 13.376933665713324
       },
-      "id": 98443197
+      "id": "98443197"
+    },
+    {
+      "id": "ce7f",
+      "cityName": "Les Epesses",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2025-12-12T20:36:22.052Z",
+      "notes": "",
+      "position": {
+        "lat": "46.9052455464292",
+        "lng": "-0.9228515625000001"
+      }
+    },
+    {
+      "id": "aee7",
+      "cityName": "Blecua y Torres",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2025-12-12T20:40:40.654Z",
+      "notes": "dfaf",
+      "position": {
+        "lat": "42.09822241118974",
+        "lng": "-0.17578125"
+      }
+    },
+    {
+      "id": "814a",
+      "cityName": "Saint-Jean-Poudge",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2025-12-12T20:44:59.831Z",
+      "notes": "sda",
+      "position": {
+        "lat": "43.5326204268101",
+        "lng": "-0.17578125"
+      }
+    },
+    {
+      "id": "5e15",
+      "cityName": "Saint-Jean-Poudge",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2025-12-12T20:44:59.831Z",
+      "notes": "sda",
+      "position": {
+        "lat": "43.5326204268101",
+        "lng": "-0.17578125"
+      }
+    },
+    {
+      "id": "3e37",
+      "cityName": "Favieres",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2025-12-12T20:46:19.842Z",
+      "notes": "",
+      "position": {
+        "lat": "48.80686346108519",
+        "lng": "2.7685546875000004"
+      }
     }
   ]
 }
