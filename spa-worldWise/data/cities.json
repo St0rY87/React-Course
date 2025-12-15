@@ -35,54 +35,6 @@
         "lng": 13.376933665713324
       },
       "id": "98443197"
-    },
-    {
-      "id": "ce7f",
-      "cityName": "Les Epesses",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "date": "2025-12-12T20:36:22.052Z",
-      "notes": "",
-      "position": {
-        "lat": "46.9052455464292",
-        "lng": "-0.9228515625000001"
-      }
-    },
-    {
-      "id": "aee7",
-      "cityName": "Blecua y Torres",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2025-12-12T20:40:40.654Z",
-      "notes": "dfaf",
-      "position": {
-        "lat": "42.09822241118974",
-        "lng": "-0.17578125"
-      }
-    },
-    {
-      "id": "ead7",
-      "cityName": "Treban",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "date": "2025-12-15T11:19:13.463Z",
-      "notes": "",
-      "position": {
-        "lat": "46.37725420510028",
-        "lng": "3.1640625000000004"
-      }
-    },
-    {
-      "id": "5556",
-      "cityName": "Hassi Messaoud",
-      "country": "Algeria",
-      "emoji": "🇩🇿",
-      "date": "2025-12-15T11:19:18.004Z",
-      "notes": "",
-      "position": {
-        "lat": "30.524413269923986",
-        "lng": "4.218750000000001"
-      }
     }
   ]
 }
