@@ -61,39 +61,27 @@
       }
     },
     {
-      "id": "814a",
-      "cityName": "Saint-Jean-Poudge",
+      "id": "ead7",
+      "cityName": "Treban",
       "country": "France",
       "emoji": "🇫🇷",
-      "date": "2025-12-12T20:44:59.831Z",
-      "notes": "sda",
-      "position": {
-        "lat": "43.5326204268101",
-        "lng": "-0.17578125"
-      }
-    },
-    {
-      "id": "5e15",
-      "cityName": "Saint-Jean-Poudge",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "date": "2025-12-12T20:44:59.831Z",
-      "notes": "sda",
-      "position": {
-        "lat": "43.5326204268101",
-        "lng": "-0.17578125"
-      }
-    },
-    {
-      "id": "3e37",
-      "cityName": "Favieres",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "date": "2025-12-12T20:46:19.842Z",
+      "date": "2025-12-15T11:19:13.463Z",
       "notes": "",
       "position": {
-        "lat": "48.80686346108519",
-        "lng": "2.7685546875000004"
+        "lat": "46.37725420510028",
+        "lng": "3.1640625000000004"
+      }
+    },
+    {
+      "id": "5556",
+      "cityName": "Hassi Messaoud",
+      "country": "Algeria",
+      "emoji": "🇩🇿",
+      "date": "2025-12-15T11:19:18.004Z",
+      "notes": "",
+      "position": {
+        "lat": "30.524413269923986",
+        "lng": "4.218750000000001"
       }
     }
   ]
