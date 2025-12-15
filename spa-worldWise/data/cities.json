@@ -1,30 +1,6 @@
 {
   "cities": [
     {
-      "cityName": "Lisbon",
-      "country": "Portugal",
-      "emoji": "🇵🇹",
-      "date": "2027-10-31T15:59:59.138Z",
-      "notes": "My favorite city so far!",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": "73930385"
-    },
-    {
-      "cityName": "Madrid",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2027-07-15T08:22:53.976Z",
-      "notes": "",
-      "position": {
-        "lat": 40.46635901755316,
-        "lng": -3.7133789062500004
-      },
-      "id": "17806751"
-    },
-    {
       "cityName": "Berlin",
       "country": "Germany",
       "emoji": "🇩🇪",
@@ -35,6 +11,42 @@
         "lng": 13.376933665713324
       },
       "id": "98443197"
+    },
+    {
+      "id": "b747",
+      "cityName": "Anadon",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2025-12-15T13:13:13.932Z",
+      "notes": "",
+      "position": {
+        "lat": "40.9964840143779",
+        "lng": "-0.9448242187500001"
+      }
+    },
+    {
+      "id": "4c67",
+      "cityName": "Enguidanos",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2025-12-15T13:32:39.694Z",
+      "notes": "",
+      "position": {
+        "lat": "39.7240885773337",
+        "lng": "-1.6699218750000002"
+      }
+    },
+    {
+      "id": "01ef",
+      "cityName": "Bujalance",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2025-12-15T13:33:50.173Z",
+      "notes": "",
+      "position": {
+        "lat": "37.89219554724437",
+        "lng": "-4.372558593750001"
+      }
     }
   ]
 }
