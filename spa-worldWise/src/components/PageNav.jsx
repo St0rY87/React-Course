@@ -2,7 +2,7 @@
 // import Logo from "./Logo";
 // import styles from "./PageNav.module.css";
 
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 // function PageNav() {
 //   return (
@@ -34,13 +34,13 @@ function PageNav() {
     <nav>
       <ul>
         <li>
-          <Link to='/'>Home</Link>
+          <NavLink to='/'>Home</NavLink>
         </li>
         <li>
-          <Link to='/pricing'>Pricing</Link>
+          <NavLink to='/pricing'>Pricing</NavLink>
         </li>
         <li>
-          <Link to='/product'>Product</Link>
+          <NavLink to='/product'>Product</NavLink>
         </li>
       </ul>
       
