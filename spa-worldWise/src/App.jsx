@@ -7,8 +7,10 @@ import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import AppLayout from "./pages/AppLayout";
 import CityList from "./components/CityList";
+import City from "./components/City";
 import CountryList from "./components/CountryList";
 import PageNotFound from "./pages/PageNotFound";
+import CityItem from "./components/CityItem";
 
 import "./index.css";
 
@@ -47,6 +49,7 @@ function App() {
         <Route path="app" element={<AppLayout />}>
           <Route index element={<CityList cities={cities} isLoading={isLoading} />}/>
           <Route path="cities" element={<CityList cities={cities} isLoading={isLoading}/>} />
+          <Route path='cities/:id' element={<City/>}></Route>
           <Route path="countries" element={<CountryList cities={cities} isLoading={isLoading}/>} />
           <Route path="form" element={<p>Form</p>} />
         </Route>
