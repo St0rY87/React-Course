@@ -25,27 +25,63 @@
       }
     },
     {
-      "id": "4c67",
-      "cityName": "Enguidanos",
+      "id": "407a",
+      "cityName": "Infantes",
       "country": "Spain",
       "emoji": "🇪🇸",
-      "date": "2025-12-15T13:32:39.694Z",
+      "date": "2026-02-26T19:47:23.819Z",
       "notes": "",
       "position": {
-        "lat": "39.7240885773337",
-        "lng": "-1.6699218750000002"
+        "lat": "38.73694606567603",
+        "lng": "-3.09814453125"
       }
     },
     {
-      "id": "01ef",
-      "cityName": "Bujalance",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2025-12-15T13:33:50.173Z",
+      "id": "a64e",
+      "cityName": "Amersid",
+      "country": "Morocco",
+      "emoji": "🇲🇦",
+      "date": "2026-02-26T19:47:23.819Z",
       "notes": "",
       "position": {
-        "lat": "37.89219554724437",
-        "lng": "-4.372558593750001"
+        "lat": "32.602361666817515",
+        "lng": "-4.394531250000001"
+      }
+    },
+    {
+      "id": "1442",
+      "cityName": "Berlanga de Duero",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2026-02-26T19:51:49.012Z",
+      "notes": "sda",
+      "position": {
+        "lat": "41.376808565702355",
+        "lng": "-2.9223632812500004"
+      }
+    },
+    {
+      "id": "95e1",
+      "cityName": "Koluszki",
+      "country": "Poland",
+      "emoji": "🇵🇱",
+      "date": "2026-02-26T19:52:06.655Z",
+      "notes": "sd",
+      "position": {
+        "lat": "51.72702815704777",
+        "lng": "19.863281250000004"
+      }
+    },
+    {
+      "id": "4c49",
+      "cityName": "Dorotea",
+      "country": "Sweden",
+      "emoji": "🇸🇪",
+      "date": "2026-02-15T19:58:42.000Z",
+      "notes": "",
+      "position": {
+        "lat": "64.35893097894458",
+        "lng": "16.259765625000004"
       }
     }
   ]
