@@ -1,18 +1,6 @@
 {
   "cities": [
     {
-      "cityName": "Berlin",
-      "country": "Germany",
-      "emoji": "🇩🇪",
-      "date": "2027-02-12T09:24:11.863Z",
-      "notes": "Amazing 😃",
-      "position": {
-        "lat": 52.53586782505711,
-        "lng": 13.376933665713324
-      },
-      "id": "98443197"
-    },
-    {
       "id": "b747",
       "cityName": "Anadon",
       "country": "Spain",
@@ -22,18 +10,6 @@
       "position": {
         "lat": "40.9964840143779",
         "lng": "-0.9448242187500001"
-      }
-    },
-    {
-      "id": "407a",
-      "cityName": "Infantes",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2026-02-26T19:47:23.819Z",
-      "notes": "",
-      "position": {
-        "lat": "38.73694606567603",
-        "lng": "-3.09814453125"
       }
     },
     {
@@ -58,30 +34,6 @@
       "position": {
         "lat": "41.376808565702355",
         "lng": "-2.9223632812500004"
-      }
-    },
-    {
-      "id": "95e1",
-      "cityName": "Koluszki",
-      "country": "Poland",
-      "emoji": "🇵🇱",
-      "date": "2026-02-26T19:52:06.655Z",
-      "notes": "sd",
-      "position": {
-        "lat": "51.72702815704777",
-        "lng": "19.863281250000004"
-      }
-    },
-    {
-      "id": "4c49",
-      "cityName": "Dorotea",
-      "country": "Sweden",
-      "emoji": "🇸🇪",
-      "date": "2026-02-15T19:58:42.000Z",
-      "notes": "",
-      "position": {
-        "lat": "64.35893097894458",
-        "lng": "16.259765625000004"
       }
     }
   ]
