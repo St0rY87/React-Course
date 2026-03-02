@@ -1,39 +1,39 @@
 {
   "cities": [
     {
-      "id": "b747",
-      "cityName": "Anadon",
+      "id": "8587",
+      "cityName": "Puebla de Alborton",
       "country": "Spain",
       "emoji": "🇪🇸",
-      "date": "2025-12-15T13:13:13.932Z",
+      "date": "2026-03-02T18:35:33.158Z",
       "notes": "",
-      "position": {
-        "lat": "40.9964840143779",
-        "lng": "-0.9448242187500001"
-      }
-    },
-    {
-      "id": "a64e",
-      "cityName": "Amersid",
-      "country": "Morocco",
-      "emoji": "🇲🇦",
-      "date": "2026-02-26T19:47:23.819Z",
-      "notes": "",
-      "position": {
-        "lat": "32.602361666817515",
-        "lng": "-4.394531250000001"
-      }
-    },
-    {
-      "id": "1442",
-      "cityName": "Berlanga de Duero",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2026-02-26T19:51:49.012Z",
-      "notes": "sda",
       "position": {
         "lat": "41.376808565702355",
-        "lng": "-2.9223632812500004"
+        "lng": "-0.8789062500000001"
+      }
+    },
+    {
+      "id": "32b0",
+      "cityName": "Villar del Pozo",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2026-03-02T18:36:00.919Z",
+      "notes": "sda",
+      "position": {
+        "lat": "38.83970761365914",
+        "lng": "-3.9990234372560556"
+      }
+    },
+    {
+      "id": "45a5",
+      "cityName": "Baruth",
+      "country": "Germany",
+      "emoji": "🇩🇪",
+      "date": "2026-03-02T18:37:09.777Z",
+      "notes": "dfsdf",
+      "position": {
+        "lat": "52.05249047600099",
+        "lng": "13.623046875"
       }
     }
   ]
