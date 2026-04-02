@@ -1,10 +1,16 @@
 import React from "react";
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
 
-type PropsInitialState = {
+type PropsStateAccount = {
   balance: number;
   loan: number;
   loanPurpose: string;
+};
+
+type PropsStateCustomer = {
+  fullname: string;
+  nationalID?: string;
+  createdAt?: string;
 };
 
 type PropsActionType = {
@@ -12,14 +18,20 @@ type PropsActionType = {
   payload?: any;
 };
 
-const initialState = {
+const initialStateAccount = {
   balance: 0,
   loan: 0,
   loanPurpose: "",
 };
 
-const reducer = (
-  state: PropsInitialState = initialState,
+const initialStateCustomer = {
+  fullname: "",
+  nationalID: "",
+  createdAt: "",
+};
+
+const accountReducer = (
+  state: PropsStateAccount = initialStateAccount,
   action: PropsActionType,
 ) => {
   switch (action.type) {
@@ -29,7 +41,7 @@ const reducer = (
       return { ...state, balance: state.balance - action.payload };
     case "account/requestLoan":
       if (state.loan > 0) return state;
-      //LATER
+   
       return {
         ...state,
         loan: action.payload.amount,
@@ -50,7 +62,35 @@ const reducer = (
   }
 };
 
-const store = createStore(reducer);
+const customerReducer = (
+  state: PropsStateCustomer = initialStateCustomer,
+  action: PropsActionType,
+) => {
+  switch (action.type) {
+    case "customer/createCustomer":
+      return {
+        ...state,
+        fullname: action.payload.fullname,
+        nationalID: action.payload.nationalID,
+        createdAt: action.payload.createdAt
+      };
+
+    case "customer/updateName":
+        return {
+            ...state, fullName: action.payload
+        }
+
+    default:
+      return state ;
+  }
+};
+
+const rootReducer = combineReducers({
+    account: accountReducer,
+    customer: customerReducer
+})
+
+const store = createStore(rootReducer);
 
 // store.dispatch({ type: "account/deposit", payload: 500 });
 // store.dispatch({ type: "account/withdraw", payload: 200 });
@@ -79,6 +119,25 @@ const requestLoan = (amount: number, purpose: string) => {
 const payLoan = () => {
   return { type: "account/payLoan" };
 };
+
+
+
+
+const createCustomer = (fullname: string, nationalID: string) => {
+  return {
+    type: "customer/createCustomer",
+    payload: { fullname, nationalID, createdAt: new Date().toISOString() },
+  };
+};
+
+const updateName = (fullname: string) => {
+  return {
+    type: "customer/updateName",
+    payload: fullname,
+  };
+};
+
+
 store.dispatch(deposit(500));
 store.dispatch(withdraw(200));
 store.dispatch(requestLoan(10000, "buy a car"));
@@ -89,3 +148,8 @@ console.log(store.getState());
 export const Store = () => {
   return <div></div>;
 };
+
+
+store.dispatch(createCustomer('Dmitriy', '21412312'))
+
+console.log(store.getState())
