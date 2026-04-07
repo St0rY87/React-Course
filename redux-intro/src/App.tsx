@@ -1,10 +1,14 @@
-import { useState } from "react";
-import { Store } from "./components/Store";
-import { CreateCustomer } from "./components/CreateCustomer";
-import { Customer } from "./components/Customer";
-import { AccountOperations } from "./components/AccountOperations";
-import { BalanceDisplay } from "./components/BalanceDisplay";
-import "./components/Store";
+import { CreateCustomer } from "./features/customers/CreateCustomer";
+import { Customer } from "./features/customers/Customer";
+import { AccountOperations } from "./features/accounts/AccountOperations";
+import { BalanceDisplay } from "./features/accounts/BalanceDisplay";
+
+import { store } from "./components/Store";
+import { deposit } from "./features/accounts/AccountSlice";
+
+store.dispatch(deposit(500));
+console.log(store.getState());
+
 function App() {
   return (
     <>
@@ -15,7 +19,5 @@ function App() {
     </>
   );
 }
-
-
 
 export default App;
