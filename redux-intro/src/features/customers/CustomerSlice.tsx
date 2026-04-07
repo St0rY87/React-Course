@@ -5,7 +5,7 @@ type PropsAction = {
 }
 
 type PropsStateCustomer = {
-  fullname: string;
+  fullName: string;
   nationalID?: string;
   createdAt?: string;
 };
@@ -13,7 +13,7 @@ type PropsStateCustomer = {
 
 
 const initialStateCustomer = {
-  fullname: "",
+  fullName: "",
   nationalID: "",
   createdAt: "",
 };
@@ -29,7 +29,7 @@ export const customerReducer = (
     case "customer/createCustomer":
       return {
         ...state,
-        fullname: action.payload.fullname,
+        fullName: action.payload.fullName,
         nationalID: action.payload.nationalID,
         createdAt: action.payload.createdAt,
       };
@@ -37,7 +37,7 @@ export const customerReducer = (
     case "customer/updateName":
       return {
         ...state,
-        fullname: action.payload,
+        fullName: action.payload,
       };
 
     default:
@@ -45,16 +45,16 @@ export const customerReducer = (
   }
 };
 
-export const createCustomer = (fullname: string, nationalID: string) => {
+export const createCustomer = (fullName: string, nationalID: string) => {
   return {
     type: "customer/createCustomer",
-    payload: { fullname, nationalID, createdAt: new Date().toISOString() },
+    payload: { fullName, nationalID, createdAt: new Date().toISOString() },
   };
 };
 
-export const updateName = (fullname: string) => {
+export const updateName = (fullName: string) => {
   return {
     type: "customer/updateName",
-    payload: fullname,
+    payload: fullName,
   };
 };

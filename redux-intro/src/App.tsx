@@ -2,20 +2,22 @@ import { CreateCustomer } from "./features/customers/CreateCustomer";
 import { Customer } from "./features/customers/Customer";
 import { AccountOperations } from "./features/accounts/AccountOperations";
 import { BalanceDisplay } from "./features/accounts/BalanceDisplay";
-
-import { store } from "./components/Store";
-import { deposit } from "./features/accounts/AccountSlice";
-
-store.dispatch(deposit(500));
-console.log(store.getState());
+import { useSelector } from "react-redux";
 
 function App() {
+  const fullName = useSelector((state: any) => state.customer.fullName);
+
   return (
     <>
-      <CreateCustomer />
-      <Customer />
-      <AccountOperations />
-      <BalanceDisplay />
+      {fullName === "" ? (
+        <CreateCustomer />
+      ) : (
+        <>
+          <Customer />
+          <AccountOperations />
+          <BalanceDisplay />
+        </>
+      )}
     </>
   );
 }
