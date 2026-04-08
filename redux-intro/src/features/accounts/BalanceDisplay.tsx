@@ -6,7 +6,7 @@ function formatCurrency(value: any) {
 }
 
 function BalanceDisplay() {
-  return <div className="balance">{formatCurrency(123456)}</div>;
+  return <div className="balance">{formatCurrency(0)}</div>;
 }
 
 export  {BalanceDisplay};
