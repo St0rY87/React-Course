@@ -1,12 +1,20 @@
-function formatCurrency(value: any) {
+import { connect } from "react-redux"
+
+function formatCurrency(value: number) { 
   return new Intl.NumberFormat("en", {
     style: "currency",
     currency: "USD",
   }).format(value);
 }
 
-function BalanceDisplay() {
-  return <div className="balance">{formatCurrency(0)}</div>;
+function BalanceDisplay({ balance }: { balance: number }) { 
+  return <div className="balance">{formatCurrency(balance)}</div>;
 }
 
-export  {BalanceDisplay};
+function mapStateToProps(state: any) { 
+  return {
+    balance: state.account.balance 
+  }
+}
+
+export default connect(mapStateToProps)(BalanceDisplay);
