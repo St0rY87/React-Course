@@ -6,7 +6,7 @@ import App from "./App.tsx";
 
 import { store } from "./components/Store.tsx";
 
-console.log(store.getState())
+// console.log(store.getState())
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
