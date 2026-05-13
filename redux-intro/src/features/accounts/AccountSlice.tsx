@@ -3,6 +3,13 @@ type PropsAction = {
   payload?: any;
 };
 
+export type PropsInitialStateAccountType = {
+  balance: number,
+  loan: number,
+  loanPurpose: string,
+  isLoading: boolean,
+}
+
 const initialStateAccount = {
   balance: 0,
   loan: 0,
@@ -47,16 +54,18 @@ export const accountReducer = (
 };
 
 export const deposit = (amount: number, currency: string) => {
-  if (currency == "USD") return { type: "account/deposit", payload: amount };
+  if (currency == "USD") return {type: "account/deposit", payload: amount};
 
   return async (dispatch: any, getState: {}) => {
     dispatch({ type: "account/convertingCurrency" });
+
     //API call
     fetch(`https://api.frankfurter.dev/v2/rates?base=${currency}&quotes=USD`)
       .then((res) => res.json())
       .then((data) => {
-        const converted = (amount * data[0].rate).toFixed(2);
+        const converted = Number((amount * data[0].rate).toFixed(2));
         console.log(converted);
+
         dispatch({ type: "account/deposit", payload: converted });
       })
       .catch((err) => err);

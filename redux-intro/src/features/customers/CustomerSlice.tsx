@@ -4,7 +4,7 @@ type PropsAction = {
   payload?: any;
 }
 
-type PropsStateCustomer = {
+export type PropsStateCustomer = {
   fullName: string;
   nationalID?: string;
   createdAt?: string;

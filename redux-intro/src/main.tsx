@@ -6,7 +6,9 @@ import App from "./App.tsx";
 
 import { store } from "./components/Store.tsx";
 
-// console.log(store.getState())
+store.dispatch({type: 'account/deposit', payload: 500})
+
+console.log(store.getState())
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

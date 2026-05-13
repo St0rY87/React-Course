@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deposit, payLoan, requestLoan, withdraw } from "./AccountSlice";
+import type { PropsInitialStateAccountType } from "./AccountSlice";
 
 function AccountOperations() {
   const [depositAmount, setDepositAmount] = useState<number | "">("");
@@ -10,6 +11,7 @@ function AccountOperations() {
   const [currency, setCurrency] = useState("USD");
 
   const dispatch = useDispatch();
+
   const {
     loan: currentLoan,
     loanPurpose: currentLoanPurpose,
@@ -21,7 +23,8 @@ function AccountOperations() {
 
   function handleDeposit() {
     if (!depositAmount) return;
-    dispatch(deposit(Number(depositAmount), currency));
+
+    dispatch(deposit(depositAmount, currency));
     setDepositAmount("");
     setCurrency("");
   }
@@ -52,7 +55,7 @@ function AccountOperations() {
           <input
             type="number"
             value={depositAmount}
-            onChange={(e) => setDepositAmount(+e.target.value)}
+            onChange={(e) => setDepositAmount(Number(e.target.value))}
           />
           <select
             value={currency}
@@ -63,7 +66,9 @@ function AccountOperations() {
             <option value="GBP">British Pound</option>
           </select>
 
-          <button onClick={handleDeposit} disabled={isLoading}>{isLoading ? 'Converting...':`Deposit ${depositAmount}` }</button>
+          <button onClick={handleDeposit} disabled={isLoading}>
+            {isLoading ? 'Converting...' : `Deposit ${depositAmount}`}
+          </button>
         </div>
 
         <div>
@@ -71,7 +76,7 @@ function AccountOperations() {
           <input
             type="number"
             value={withdrawalAmount}
-            onChange={(e) => setWithdrawalAmount(+e.target.value)}
+            onChange={(e) => setWithdrawalAmount(Number(e.target.value))}
           />
           <button onClick={handleWithdrawal}>
             Withdraw {withdrawalAmount}
@@ -83,7 +88,7 @@ function AccountOperations() {
           <input
             type="number"
             value={loanAmount}
-            onChange={(e) => setLoanAmount(+e.target.value)}
+            onChange={(e) => setLoanAmount(Number(e.target.value))}
             placeholder="Loan amount"
           />
           <input

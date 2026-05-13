@@ -18,6 +18,13 @@ function App() {
           <BalanceDisplay />
         </>
       )}
+      {/* <>
+      <h1>The React-Redux Bank</h1>
+        <CreateCustomer />
+        <Customer />
+        <AccountOperations />
+        <BalanceDisplay />
+      </> */}
     </>
   );
 }
