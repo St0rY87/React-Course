@@ -55,10 +55,10 @@ export const accountReducer = (
 
 export const deposit = (amount: number, currency: string) => {
   if (currency == "USD") return {type: "account/deposit", payload: amount};
-
+  
   return async (dispatch: any, getState: {}) => {
     dispatch({ type: "account/convertingCurrency" });
-
+    
     //API call
     fetch(`https://api.frankfurter.dev/v2/rates?base=${currency}&quotes=USD`)
       .then((res) => res.json())
