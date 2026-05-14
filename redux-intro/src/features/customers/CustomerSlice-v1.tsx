@@ -1,6 +1,3 @@
-import { createSlice } from "@reduxjs/toolkit"; 
-
-
 type PropsAction = {
   type: string;
   payload?: any;

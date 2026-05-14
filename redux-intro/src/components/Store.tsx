@@ -14,7 +14,6 @@ const store = configureStore({
 export {store};
 
 
-
 // import { combineReducers, createStore } from "redux";
 
 // const initialStateAccount: StateAccountType = {
