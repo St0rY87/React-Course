@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../redux/hooks";
 import { deposit, payLoan, requestLoan, withdraw } from "./AccountSlice";
-import type { PropsInitialStateAccountType } from "./AccountSlice";
 
 function AccountOperations() {
   const [depositAmount, setDepositAmount] = useState<number | "">("");
@@ -10,7 +10,7 @@ function AccountOperations() {
   const [loanPurpose, setLoanPurpose] = useState("");
   const [currency, setCurrency] = useState("USD");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const {
     loan: currentLoan,
@@ -24,7 +24,7 @@ function AccountOperations() {
   function handleDeposit() {
     if (!depositAmount) return;
 
-    dispatch(deposit(depositAmount, currency));
+    dispatch(deposit(Number(depositAmount), currency));
     setDepositAmount("");
     setCurrency("");
   }
@@ -43,7 +43,7 @@ function AccountOperations() {
   }
 
   function handlePayLoan() {
-    dispatch(payLoan());
+    dispatch(payLoan(null));
   }
 
   return (
@@ -67,7 +67,7 @@ function AccountOperations() {
           </select>
 
           <button onClick={handleDeposit} disabled={isLoading}>
-            {isLoading ? 'Converting...' : `Deposit ${depositAmount}`}
+            {isLoading ? "Converting..." : `Deposit ${depositAmount}`}
           </button>
         </div>
 

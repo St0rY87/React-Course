@@ -4,11 +4,7 @@ import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App.tsx";
 
-import { store } from "./components/Store.tsx";
-
-store.dispatch({type: 'account/deposit', payload: 500})
-
-console.log(store.getState())
+import { store } from "./redux/hooks.ts";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

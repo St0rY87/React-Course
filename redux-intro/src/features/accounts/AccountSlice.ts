@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { withdraw } from "./AccountSlice-v1";
 
 // type PropsAction = {
 //   type: string;
@@ -19,35 +18,83 @@ const initialState = {
   loanPurpose: "",
   isLoading: false,
 };
+ 
 
-
-const accountSlice = createSlice({
+ const accountSlice = createSlice({
   name: 'account',
   initialState,
   reducers: {
     deposit(state, action) {
       state.balance += action.payload;
+      state.isLoading = false;
     },
     withdraw(state, action) {
       state.balance -= action.payload
     },
-    requestLoan(state, action) {
-       if (state.loan > 0) return state;
+
+    requestLoan: {
+      prepare(amount: number, purpose: string) {
+        return {
+          payload: {amount, purpose}
+        }
+      },
+      reducer(state, action) {
+      if (state.loan > 0) return;
       state.loan= action.payload.amount;
       state.loanPurpose = action.payload.purpose;
       state.balance += action.payload.amount;
-    },
-    payLoan(state, action){
+    }},
+
+    payLoan(state){
+      state.balance -= state.loan;
       state.loan = 0;
       state.loanPurpose = "";
-      state.balance -= state.loan;
+    },
+    convertingCurrency(state) {
+      state.isLoading = true;
     }
   }
 })
 
 
-export
+export const { payLoan,requestLoan,withdraw} = accountSlice.actions
 
+export const deposit = (amount: number, currency: string) => {
+  if (currency == "USD") return {type: "account/deposit", payload: amount};
+  
+  return async (dispatch: any, getState: {}) => {
+    dispatch({ type: "account/convertingCurrency" });
+    
+    //API call
+    fetch(`https://api.frankfurter.dev/v2/rates?base=${currency}&quotes=USD`)
+      .then((res) => res.json())
+      .then((data) => {
+        const converted = Number((amount * data[0].rate).toFixed(2));
+        console.log(converted);
+
+        dispatch({ type: "account/deposit", payload: converted });
+      })
+      .catch((err) => err);
+  };
+};
+
+export default accountSlice.reducer
+
+
+
+
+
+// type PropsAction = {
+//   type: string;
+//   payload?: any;
+// };
+
+// const initialStateAccount = {
+//   balance: 0,
+//   loan: 0,
+//   loanPurpose: "",
+//   isLoading: false,
+// };
 // export const accountReducer = (
 //   state = initialStateAccount,
 //   action: PropsAction,
