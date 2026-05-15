@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useAppDispatch } from "../../redux/hooks";
 import { createCustomer } from "./CustomerSlice";
-import { store } from "../../redux/hooks";
+import { store } from "../../components/Store"; 
+import { useDispatch } from "react-redux";
 
 function CreateCustomer() {
   const [fullName, setFullName] = useState("");
   const [nationalId, setNationalId] = useState("");
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   function handleClick() {
     if (!fullName || !nationalId) return;
