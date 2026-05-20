@@ -98,16 +98,33 @@ function CreateOrder() {
 //   return redirect(`/order/${newOrder.id}`)
 // }
 
-export async function action({ request }) {
+// export async function action({ request }) {
+//   const formData = await request.formData();
+//   const data = Object.fromEntries(formData);
+//   const newData = {
+//     ...data,
+//     cart: JSON.parse(data.cart),
+//     priority: data.priority === 'on',
+//   };
+//   console.log(newData);
+//   return null;
+// }
+
+
+export async function action({request}) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  const newData = {
+
+  const order = {
     ...data,
     cart: JSON.parse(data.cart),
     priority: data.priority === 'on',
-  };
-  console.log(newData);
-  return null;
+  }
+
+  const newOrder = await createOrder(order);
+  console.log(newOrder)
+  
+  return redirect(`/order/${newOrder.id}`);
 }
 
 export default CreateOrder;
