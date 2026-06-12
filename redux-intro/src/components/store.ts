@@ -1,20 +1,15 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
-import { thunk } from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { configureStore } from "@reduxjs/toolkit";
+import accountReducer from "../features/accounts/accountSlice";
+import customerReducer from "../features/customers/customerSlice";
 
-import { accountReducer } from "../features/accounts/AccountSlice";
-import { customerReducer } from "../features/customers/CustomerSlice";
-
-const rootReducer = combineReducers({
-  account: accountReducer,
-  customer: customerReducer,
+const store = configureStore({
+  reducer: {
+    account: accountReducer,
+    customer: customerReducer,
+  },
 });
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
-
-export {store};
-
-
+export { store };
 
 // import { combineReducers, createStore } from "redux";
 
@@ -72,7 +67,7 @@ export {store};
 //   }
 // }
 
-// const rootReducer = combineReducers({ 
+// const rootReducer = combineReducers({
 //   account: accountReducer,
 //   customer: customerReducer
 // });
@@ -133,7 +128,6 @@ export {store};
 // store.dispatch(requestLoan(1000, "Buy a new car"));
 // store.dispatch(payLoan());
 // console.log(store.getState());
-
 
 // store.dispatch(createCustomer('Dmitriy Savin', '123'))
 // store.dispatch(deposit(500))

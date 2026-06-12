@@ -1,3 +1,6 @@
+import { createSlice } from "@reduxjs/toolkit";
+import reducer from "./accountSlice";
+
 type PropsAction = {
   type: string;
   payload?: any;
@@ -89,3 +92,47 @@ export const requestLoan = (amount: number, purpose: string) => {
 export const payLoan = () => {
   return { type: "account/payLoan" };
 };
+
+
+const accountSlice = createSlice({
+  name: 'account',
+  initialState: initialStateAccount,
+  reducers: {
+    deposit(state, action) {
+      state.balance += action.payload
+    },
+    withdraw(state, action) {
+      state.balance -= action.payload
+    },
+
+    requestLoan(state, action){
+        prepare(amount, purpose) {
+          return {
+            payload: {amount, purpose}
+          }
+        },
+
+        reducer(state, action){
+          if (state.loan > 0) return state
+      state.loan = action.payload.amount
+      state.loanPurpose = action.payload.purpose
+      state.balance += action.payload.amount
+        }
+      
+    },
+
+
+    payLoan(state) {
+      state.loan = 0
+      state.balance -= state.loan
+      state.loanPurpose = ""
+    },
+    convertingCurrency(state) {
+      state.isLoading = true
+    }
+  }
+})
+
+// export const {payLoan,requestLoan,withdraw} = accountSlice.actions;
+
+// export default accountSlice.reducer
