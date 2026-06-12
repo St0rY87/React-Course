@@ -5,11 +5,18 @@ type ButtonPropsType = {
   disabled?: boolean;
   to?: string;
   type: ButtonTypes;
+  onClick?: () => void;
 };
 
 type ButtonTypes = "primary" | "small" | "secondary";
 
-export const Button = ({ children, disabled, to, type }: ButtonPropsType) => {
+export const Button = ({
+  children,
+  disabled,
+  to,
+  type,
+  onClick,
+}: ButtonPropsType) => {
   const base =
     "text-sm inline-block rounded-full bg-yellow-400 font-semibold uppercase tracking-wide text-stone-800 transition-colors duration-300 hover:bg-yellow-300 focus:bg-yellow-300 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300";
 
@@ -26,6 +33,13 @@ export const Button = ({ children, disabled, to, type }: ButtonPropsType) => {
       <Link className={styles[type]} to={to}>
         {children}
       </Link>
+    );
+
+  if (onClick)
+    return (
+      <button onClick={onClick} disabled={disabled} className={styles[type]}>
+        {children}
+      </button>
     );
 
   return (
