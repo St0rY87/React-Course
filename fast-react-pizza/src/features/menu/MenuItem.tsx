@@ -8,21 +8,20 @@ type Props = {
   pizza: PizzaType;
 };
 
-
 function MenuItem({ pizza }: Props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
-function handleAddToCart() {
-  const newPizza = {
+  function handleAddToCart() {
+    const newPizza = {
       paizzaId: id,
       name,
       quantity: 1,
       unitPrice,
       totalPrice: unitPrice * 1,
-    }
-    dispatch(addItem(newPizza))
-}
+    };
+    dispatch(addItem(newPizza));
+  }
 
   return (
     <li className="flex gap-4 py-2">
@@ -31,12 +30,12 @@ function handleAddToCart() {
         alt={name}
         className={`h-24 ${soldOut ? "opacity-70 grayscale" : ""} `}
       />
-      <div className="flex flex-col grow pt-0.5">
+      <div className="flex grow flex-col pt-0.5">
         <p className="font-medium">{name}</p>
         <p className="text-sm capitalize italic text-stone-500">
           {ingredients.join(", ")}
         </p>
-        <div className="mt-auto flex  items-center justify-between">
+        <div className="mt-auto flex items-center justify-between">
           {!soldOut ? (
             <p className="text-sm">{formatCurrency(unitPrice)}</p>
           ) : (
@@ -44,7 +43,11 @@ function handleAddToCart() {
               Sold out
             </p>
           )}
-          {!soldOut && <Button onClick={handleAddToCart} type="small">Add to cart</Button>}
+          {!soldOut && (
+            <Button onClick={handleAddToCart} type="small">
+              Add to cart
+            </Button>
+          )}
         </div>
       </div>
     </li>
