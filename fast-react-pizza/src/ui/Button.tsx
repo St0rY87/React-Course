@@ -8,7 +8,7 @@ type ButtonPropsType = {
   onClick?: () => void;
 };
 
-type ButtonTypes = "primary" | "small" | "secondary";
+type ButtonTypes = "primary" | "small" | "secondary" | "round";
 
 export const Button = ({
   children,
@@ -26,6 +26,7 @@ export const Button = ({
     secondary:
       base +
       " px-4 py-2.5 md:px-6 md:py-3.5 border-2 border-stone-300 bg-transparent text-stone-400 focus:ring-stone-200 focus:text-stone-800 hover:text-stone-800  focus:bg-stone-300 hover:bg-stone-300",
+    round: base +  " px-2.5 py-1 md:px-3.5 md:py-2 text-sm"
   };
 
   if (to)

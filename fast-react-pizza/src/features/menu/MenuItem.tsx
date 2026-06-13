@@ -4,6 +4,7 @@ import { formatCurrency } from "../../utils/helpers";
 import type { PizzaType } from "./Menu";
 import { addItem, getCurrentQuantityById } from "../cart/cartSlice";
 import { DeleteItem } from "../cart/DeleteItem";
+import { UdpatedItemQuantity } from "../cart/UdpatedItemQuantity";
 
 type Props = {
   pizza: PizzaType;
@@ -13,12 +14,12 @@ function MenuItem({ pizza }: Props) {
   const dispatch = useDispatch();
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
-  const currentQuantity = useSelector(getCurrentQuantityById(id))
+  const currentQuantity = useSelector(getCurrentQuantityById(id));
   // const currentQuantity = useSelector(state => getCurrentQuantityById(state, id))
 
-  const isInCart = currentQuantity > 0
+  const isInCart = currentQuantity > 0;
 
-function handleAddToCart() {
+  function handleAddToCart() {
     const newPizza = {
       pizzaId: id,
       name,
@@ -50,14 +51,21 @@ function handleAddToCart() {
             </p>
           )}
 
-           {isInCart > 0 ? <DeleteItem pizzaId={id} /> : !soldOut && (
-            <Button onClick={handleAddToCart} type="small">
-              Add to cart
-            </Button>
+          {isInCart > 0 ? (
+            <div className="flex items-center gap-3 sm:gap-8">
+              <UdpatedItemQuantity
+                pizzaId={id}
+                currentQuantity={currentQuantity}
+              />
+              <DeleteItem pizzaId={id} />
+            </div>
+          ) : (
+            !soldOut && (
+              <Button onClick={handleAddToCart} type="small">
+                Add to cart
+              </Button>
+            )
           )}
-
-         
-      
         </div>
       </div>
     </li>
