@@ -32,15 +32,15 @@ import EmptyCart from "./EmptyCart";
 // ];
 
 function Cart() {
-  const dispatch = useDispatch()
-  const username = useSelector(getUserName)
-  const cart = useSelector(getCart)
+  const dispatch = useDispatch();
+  const username = useSelector(getUserName);
+  const cart = useSelector(getCart);
 
   const handleClearCart = () => {
-    dispatch(clearCart())
-  }
+    dispatch(clearCart());
+  };
 
-  if(!cart.length) return <EmptyCart/>
+  if (!cart.length) return <EmptyCart />;
   return (
     <div className="px-4 py-3">
       <LinkButton to="/menu">&larr; Back to menu</LinkButton>
@@ -49,7 +49,7 @@ function Cart() {
 
       <ul className="mt-3 divide-y divide-stone-200 border-b">
         {cart.map((item) => (
-          <CartItem item={item} key={item.key} />
+          <CartItem item={item} key={item.id} />
         ))}
       </ul>
 
@@ -57,7 +57,9 @@ function Cart() {
         <Button to="/order/new" type="primary">
           Order pizzas
         </Button>
-        <Button onClick={handleClearCart}  type="secondary">Clear cart</Button>
+        <Button onClick={handleClearCart} type="secondary">
+          Clear cart
+        </Button>
       </div>
     </div>
   );
